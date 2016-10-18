@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="text-muted">Tweets Exporter</h3>
+            <nav>
+                <ul class="nav nav-justified">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Tweet", "Index", "Tweet")</li>
+                    <li>@Html.ActionLink("PostDs", "Index", "PostDs")</li>
+                    <li><a href="#">Menu Item</a></li>
+                    <li><a href="#">Menu Item</a></li>
+                    <li><a href="#">Menu Item</a></li>
+
+                </ul>
+            </nav>
+        </div>
+
+        @RenderBody()
+
+        <!– Site footer –>
+        <footer class="footer">
+            <p>&copy; 2016 MNT Team</p>
+        </footer>
+    </div> <!– /container –>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

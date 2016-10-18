@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="TSearchDBEntities-Web.config Connection String" description="TSearchDBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Twitter.csdl|res://*/Models.Twitter.ssdl|res://*/Models.Twitter.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=40.112.221.164;initial catalog=TSearchDB;persist security info=True;user id=TSearchUser;password=SogetiTeam2016;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\tmamedbe\\Documents\\GitHub\\asp-responsive\\asp-responsive\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TSearchDBEntities']/@connectionString" />
+  </parameter>
+</parameters>

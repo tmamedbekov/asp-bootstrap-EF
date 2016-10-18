@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="TwswebApp" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\tmamedbe\\Documents\\GitHub\\asp-responsive\\asp-responsive\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\tmamedbe\\Documents\\GitHub\\asp-responsive\\asp-responsive\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="TSearchDBEntities-Web.config Connection String" description="" value="metadata=res://*/Models.Twitter.csdl|res://*/Models.Twitter.ssdl|res://*/Models.Twitter.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=40.112.221.164;Initial Catalog=TSearchDB;Persist Security Info=True;User ID=TSearchUser;Password=SogetiTeam2016;MultipleActiveResultSets=True;Application Name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\tmamedbe\\Documents\\GitHub\\asp-responsive\\asp-responsive\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TSearchDBEntities']/@connectionString" />
+  </parameter>
+</parameters>

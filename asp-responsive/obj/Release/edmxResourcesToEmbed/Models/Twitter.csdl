@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TSearchDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SourceId" Type="Int32" Nullable="false" />
+    <Property Name="SearchTypeId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Long" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Lat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InsertDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Processed" Type="Boolean" />
+    <NavigationProperty Name="SearchType" Relationship="Self.FK_Master_SearchType" FromRole="Master" ToRole="SearchType" />
+    <NavigationProperty Name="Source" Relationship="Self.FK_Master_Source" FromRole="Master" ToRole="Source" />
+  </EntityType>
+  <EntityType Name="PostD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SourceId" Type="Int32" Nullable="false" />
+    <Property Name="SearchTypeId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Long" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Lat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsSelected" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SearchType" Relationship="Self.FK_PostD_SearchType" FromRole="PostD" ToRole="SearchType" />
+    <NavigationProperty Name="Source" Relationship="Self.FK_PostD_Source" FromRole="PostD" ToRole="Source" />
+  </EntityType>
+  <EntityType Name="SearchType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Masters" Relationship="Self.FK_Master_SearchType" FromRole="SearchType" ToRole="Master" />
+    <NavigationProperty Name="PostDs" Relationship="Self.FK_PostD_SearchType" FromRole="SearchType" ToRole="PostD" />
+  </EntityType>
+  <EntityType Name="Source">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Masters" Relationship="Self.FK_Master_Source" FromRole="Source" ToRole="Master" />
+    <NavigationProperty Name="PostDs" Relationship="Self.FK_PostD_Source" FromRole="Source" ToRole="PostD" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Master_SearchType">
+    <End Role="SearchType" Type="Self.SearchType" Multiplicity="1" />
+    <End Role="Master" Type="Self.Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SearchType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Master">
+        <PropertyRef Name="SearchTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Master_Source">
+    <End Role="Source" Type="Self.Source" Multiplicity="1" />
+    <End Role="Master" Type="Self.Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Master">
+        <PropertyRef Name="SourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostD_SearchType">
+    <End Role="SearchType" Type="Self.SearchType" Multiplicity="1" />
+    <End Role="PostD" Type="Self.PostD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SearchType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostD">
+        <PropertyRef Name="SearchTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostD_Source">
+    <End Role="Source" Type="Self.Source" Multiplicity="1" />
+    <End Role="PostD" Type="Self.PostD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostD">
+        <PropertyRef Name="SourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TSearchDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Masters" EntityType="Self.Master" />
+    <EntitySet Name="PostDs" EntityType="Self.PostD" />
+    <EntitySet Name="SearchTypes" EntityType="Self.SearchType" />
+    <EntitySet Name="Sources" EntityType="Self.Source" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Master_SearchType" Association="Self.FK_Master_SearchType">
+      <End Role="SearchType" EntitySet="SearchTypes" />
+      <End Role="Master" EntitySet="Masters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Master_Source" Association="Self.FK_Master_Source">
+      <End Role="Source" EntitySet="Sources" />
+      <End Role="Master" EntitySet="Masters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostD_SearchType" Association="Self.FK_PostD_SearchType">
+      <End Role="SearchType" EntitySet="SearchTypes" />
+      <End Role="PostD" EntitySet="PostDs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostD_Source" Association="Self.FK_PostD_Source">
+      <End Role="Source" EntitySet="Sources" />
+      <End Role="PostD" EntitySet="PostDs" />
+    </AssociationSet>
+    <FunctionImport Name="InsertProcessedMasterRecords">
+      <Parameter Name="Text" Mode="In" Type="String" />
+      <Parameter Name="Long" Mode="In" Type="Decimal" />
+      <Parameter Name="Lat" Mode="In" Type="Decimal" />
+      <Parameter Name="Location" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TSearchDBModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TSearchDBModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
